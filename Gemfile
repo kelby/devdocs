@@ -26,6 +26,13 @@ end
 
 group :development do
   gem 'better_errors'
+
+  gem 'capistrano', '~> 3.6'
+  # gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano-bundler', '~> 1.2'
+  # gem 'capistrano-secrets-yml', '~> 1.0.0'
 end
 
 group :docs do
