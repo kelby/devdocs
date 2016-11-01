@@ -54,3 +54,5 @@ if ENV['SELENIUM'] == '1'
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+
+gem 'puma', '~> 3.0'

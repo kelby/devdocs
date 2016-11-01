@@ -141,6 +141,7 @@ DEPENDENCIES
   nokogiri
   progress_bar
   pry (~> 0.10.0)
+  puma (~> 3.0)
   rack
   rack-test
   rake
