@@ -74,9 +74,9 @@ class App < Sinatra::Application
 
   configure :production do
     set :static, false
-    set :cdn_origin, 'https://cdn.devdocs.io'
-    set :docs_origin, '//docs.devdocs.io'
-    set :csp, "default-src 'self' *; script-src 'self' 'nonce-devdocs' http://cdn.devdocs.io https://cdn.devdocs.io https://www.google-analytics.com https://secure.gaug.es http://*.jquery.com https://*.jquery.com; font-src data:; style-src 'self' 'unsafe-inline' *; img-src 'self' * data:;"
+    # set :cdn_origin, 'https://cdn.devdocs.io'
+    # set :docs_origin, '//docs.devdocs.io'
+    # set :csp, "default-src 'self' *; script-src 'self' 'nonce-devdocs' http://cdn.devdocs.io https://cdn.devdocs.io https://www.google-analytics.com https://secure.gaug.es http://*.jquery.com https://*.jquery.com; font-src data:; style-src 'self' 'unsafe-inline' *; img-src 'self' * data:;"
 
     use Rack::ConditionalGet
     use Rack::ETag
@@ -96,7 +96,7 @@ class App < Sinatra::Application
 
     Sprockets::Helpers.configure do |config|
       config.digest = true
-      config.asset_host = 'cdn.devdocs.io'
+      # config.asset_host = 'cdn.devdocs.io'
       config.manifest = Sprockets::Manifest.new(sprockets, assets_manifest_path)
     end
   end
@@ -217,7 +217,7 @@ class App < Sinatra::Application
   before do
     if request.host == OUT_HOST && !request.path.start_with?('/s/')
       query_string = "?#{request.query_string}" unless request.query_string.empty?
-      redirect "http://devdocs.io#{request.path}#{query_string}", 302
+      redirect "http://zhenkuan.li#{request.path}#{query_string}", 302
     end
   end
 
@@ -268,9 +268,9 @@ class App < Sinatra::Application
     '/s/jetbrains/c'      => 'https://www.jetbrains.com/clion/?utm_source=devdocs&utm_medium=sponsorship&utm_campaign=devdocs',
     '/s/jetbrains/web'    => 'https://www.jetbrains.com/webstorm/?utm_source=devdocs&utm_medium=sponsorship&utm_campaign=devdocs',
     '/s/code-school'      => 'http://www.codeschool.com/?utm_campaign=devdocs&utm_content=homepage&utm_source=devdocs&utm_medium=sponsorship',
-    '/s/tw'               => 'https://twitter.com/intent/tweet?url=http%3A%2F%2Fdevdocs.io&via=DevDocs&text=All-in-one%20API%20documentation%20browser%20with%20offline%20mode%20and%20instant%20search%3A',
-    '/s/fb'               => 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdevdocs.io',
-    '/s/re'               => 'https://www.reddit.com/submit?url=http%3A%2F%2Fdevdocs.io&title=All-in-one%20API%20documentation%20browser%20with%20offline%20mode%20and%20instant%20search&resubmit=true'
+    '/s/tw'               => 'https://twitter.com/intent/tweet?url=http%3A%2F%2Fzhenkuan.li&via=DevDocs&text=All-in-one%20API%20documentation%20browser%20with%20offline%20mode%20and%20instant%20search%3A',
+    '/s/fb'               => 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fzhenkuan.li',
+    '/s/re'               => 'https://www.reddit.com/submit?url=http%3A%2F%2Fzhenkuan.li&title=All-in-one%20API%20documentation%20browser%20with%20offline%20mode%20and%20instant%20search&resubmit=true'
   }.each do |path, url|
     class_eval <<-CODE, __FILE__, __LINE__ + 1
       get '#{path}' do
@@ -326,36 +326,36 @@ class App < Sinatra::Application
   configure do
     require 'rss'
     feed = RSS::Maker.make('atom') do |maker|
-      maker.channel.id = 'tag:devdocs.io,2014:/feed'
+      maker.channel.id = 'tag:zhenkuan.li,2014:/feed'
       maker.channel.title = 'DevDocs'
       maker.channel.author = 'DevDocs'
       maker.channel.updated = "#{settings.news.first.first}T14:00:00Z"
 
       maker.channel.links.new_link do |link|
         link.rel = 'self'
-        link.href = 'http://devdocs.io/feed.atom'
+        link.href = 'http://zhenkuan.li/feed.atom'
         link.type = 'application/atom+xml'
       end
 
       maker.channel.links.new_link do |link|
         link.rel = 'alternate'
-        link.href = 'http://devdocs.io/'
+        link.href = 'http://zhenkuan.li/'
         link.type = 'text/html'
       end
 
       news.each_with_index do |news, i|
         maker.items.new_item do |item|
-          item.id = "tag:devdocs.io,2014:News/#{settings.news.length - i}"
+          item.id = "tag:zhenkuan.li,2014:News/#{settings.news.length - i}"
           item.title = news[1].split("\n").first.gsub(/<\/?[^>]*>/, '')
           item.description do |desc|
-            desc.content = news[1..-1].join.gsub("\n", '<br>').gsub('href="/', 'href="http://devdocs.io/')
+            desc.content = news[1..-1].join.gsub("\n", '<br>').gsub('href="/', 'href="http://zhenkuan.li/')
             desc.type = 'html'
           end
           item.updated = "#{news.first}T14:00:00Z"
           item.published = "#{news.first}T14:00:00Z"
           item.links.new_link do |link|
             link.rel = 'alternate'
-            link.href = 'http://devdocs.io/'
+            link.href = 'http://zhenkuan.li/'
             link.type = 'text/html'
           end
         end
