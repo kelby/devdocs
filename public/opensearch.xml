@@ -3,10 +3,10 @@
   <ShortName>DevDocs</ShortName>
   <Description>Search API documentation</Description>
   <Tags>devdocs</Tags>
-  <Url type="text/html" method="get" template="http://zhenkuan.li/#q={searchTerms}"/>
-  <Image height="16" width="16" type="image/vnd.microsoft.icon">https://zhenkuan.li/favicon.ico</Image>
-  <Image height="64" width="64" type="image/x-icon">https://zhenkuan.li/images/icon-64.png</Image>
+  <Url type="text/html" method="get" template="http://doc.zhenkuan.li/#q={searchTerms}"/>
+  <Image height="16" width="16" type="image/vnd.microsoft.icon">https://doc.zhenkuan.li/favicon.ico</Image>
+  <Image height="64" width="64" type="image/x-icon">https://doc.zhenkuan.li/images/icon-64.png</Image>
   <InputEncoding>UTF-8</InputEncoding>
-  <moz:SearchForm>http://zhenkuan.li</moz:SearchForm>
+  <moz:SearchForm>http://doc.zhenkuan.li</moz:SearchForm>
   <Url type="application/opensearchdescription+xml" rel="self" template="http://devdocs.io/opensearch.xml"/>
 </OpenSearchDescription>
